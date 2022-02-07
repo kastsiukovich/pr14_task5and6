@@ -66,15 +66,15 @@ var listModal = [
 var list = [
     {
         name: 'Link1',
-        ref: '#link1' 
+        ref: '#link1'
     },
     {
         name: 'Link2',
-        ref: '#link2' 
+        ref: '#link2'
     },
     {
         name: 'Link3',
-        ref: '#link3', 
+        ref: '#link3',
         subMenu: [
             {
                 name: 'Link3.1',
@@ -88,7 +88,7 @@ var list = [
     },
     {
         name: 'Link4',
-        ref: '#link4' 
+        ref: '#link4'
     },
     {
         name: 'Link5',

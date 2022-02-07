@@ -31,12 +31,12 @@ butt.addEventListener('click', function () {
 
 
 ul.addEventListener('click', function (event) {
-    // console.log(event.target.tagName)
+
     if (event.target.tagName === 'LI') {
         if (event.target.style.textDecoration === 'line-through') {
-            // console.log(event.target.getAttribute("style"))
+
             event.target.setAttribute('style', 'text-decoration: none');
-            // event.target.style.textDecoration = 'none';
+
         } else {
             event.target.setAttribute('style', 'text-decoration: line-through ');
         }
@@ -44,44 +44,65 @@ ul.addEventListener('click', function (event) {
 })
 
 
+// Task4 1вариант 
+// var form = document.getElementsByTagName('form')[0];
+// form.addEventListener('blur', function (e) {
+//     console.log(e.target)
+
+//     var d = e.target.dataset.length;
+//     // var span = e.target.classList.contains('yes');
+//     // console.log(name)
+//     if (e.target.value.length > d) {
+//         e.target.style.borderColor = "green";
+
+//     } else {
+//         e.target.style.borderColor = "red";
+//         // var span = document.querySelector('.yes');
+//         // for (var i of span) {
+//             // console.log(i)
+//             // if (e.target == i) {
+
+//             // }
+//         //     span.i.innerHTML = 'Неправильное количество символов';
+//         // }
+//     }
+// }, true)
 // Task4
-var form = document.getElementsByTagName('form')[0];
-form.addEventListener('blur', function (e) {
-    console.log(e.target)
+//второй вариант
+var input1 = document.forms[0].elements.input1;
+var input2 = document.forms[0].elements.input2;
+var input3 = document.forms[0].elements.input3;
 
-    var d = e.target.dataset.length;
-    // var span = e.target.classList.contains('yes');
-    // console.log(name)
-    if (e.target.value.length > d) {
-        e.target.style.borderColor = "green";
+input1.addEventListener('blur', isCorrectLength)
+input2.addEventListener('blur', isCorrectLength)
+input3.addEventListener('blur', isCorrectLength)
 
-    } else {
-        e.target.style.borderColor = "red";
-        var span = document.querySelector('.yes');
-        for (var i of span) {
-            // console.log(i)
-            // if (e.target == i) {
-
-            // }
-            span.i.innerHTML = 'Неправильное количество символов';
+function isCorrectLength(e) {
+    var correctLength = Number(e.target.dataset.length);
+    var currentStr = e.target.value.length;
+    if (correctLength === currentStr) {
+        if (e.target.parentElement.className === 'border-red') {
+            e.target.parentElement.classList.remove('border-red');
+            e.target.parentElement.classList.add('border-green');
+            e.target.nextElementSibling.innerHTML = ''
+        } else {
+            e.target.parentElement.classList.add('border-green');
         }
-
-
-
+    } else if (correctLength != currentStr) {
+        e.target.parentElement.classList.add('border-red');
+        e.target.parentElement.classList.remove('border-green');
+        e.target.nextElementSibling.innerHTML = '<p>Неправильное количество символов</p>'
+        e.target.nextElementSibling.style.cssText = 'color: red; font-size: 30px; font-weight: bold'
     }
-}, true)
-
+};
 
 // task 5
 var card = document.querySelector('#current-cart');
-var price = document.getElementsByClassName('price')[0].innerText;
+var price = document.getElementsByClassName('price')[0];
 var btn = document.querySelector('#current-cart').lastElementChild.lastElementChild.previousElementSibling;
 var sumResult = document.querySelector('#current-total');
 
 card.addEventListener('click', function (event) {
-
-    // var minus = document.getElementsByClassName('total')[0].value;
-
 
     if (event.target.dataset.subtrac != undefined && document.getElementsByClassName('total')[0].value > 0) {
         document.getElementsByClassName('total')[0].value = Number(document.getElementsByClassName('total')[0].value) - 1;
@@ -91,9 +112,9 @@ card.addEventListener('click', function (event) {
     }
 })
 btn.addEventListener('click', function (e) {
-    // console.log(typeof price)
+
     if (e.target) {
-        sumResult.innerText = `${Number(price) * document.getElementsByClassName('total')[0].value}`;
+        sumResult.innerText = `${Number(price.innerText) * document.getElementsByClassName('total')[0].value}`;
     }
 });
 
@@ -106,20 +127,67 @@ var btn2 = document.querySelectorAll('.total-sum')[0];
 var sumResult2 = document.querySelector('#current-total-items');
 
 card2.addEventListener('click', function (event) {
-    //    console.log(event.target.dataset.subtrac)
+
     if (event.target.dataset.subtrac != undefined && event.target.nextElementSibling.value > 0) {
         event.target.nextElementSibling.value = Number(event.target.nextElementSibling.value) - 1;
     }
     if (event.target.dataset.sum != undefined) {
-        // console.log(event.target.previousElementSibling.value)
+
         event.target.previousElementSibling.value = Number(event.target.previousElementSibling.value) + 1;
     }
 })
 btn2.addEventListener('click', function (e) {
-    // console.log(e.target)
+
     if (e.target) {
         sumResult2.innerText = `${Number(price2[1].innerText) * total[1].value + Number(price2[2].innerText) * total[2].value + Number(price2[3].innerText) * total[3].value + Number(price2[4].innerText) * total[4].value}`;
     }
 });
 
 
+
+// task7
+var input = document.getElementsByTagName('input')[9];
+var input7 = document.querySelector('.input7');
+
+input.addEventListener('keydown', function (e) {
+    console.log(e.key === "Enter");
+    if (e.key === "Enter") {
+        input7.insertAdjacentHTML('beforeend', `<p>${input.value}</p>`);
+        input.value = '';
+        input.focus();
+    }
+})
+
+// task8
+
+var div1 = document.getElementById('modal-box');
+var modal = document.getElementById('modal1');
+div1.addEventListener('click', function (e) {
+    var currentElement = e.target;
+    var currentNumb = e.target.dataset.numb;
+    console.log(currentNumb)
+    if (currentElement.classList.contains('waves-effect')) {
+        generateModalInfo(currentNumb);
+        modal.classList.add('modal_open');
+    }
+})
+window.addEventListener('keydown', function (e) {
+    if (e.key === "Escape" && modal.classList.contains('modal_open')) {
+        modal.classList.remove('modal_open');
+    }
+});
+function generateModalInfo(currentId) {
+    var result = listModal.filter(function (item, index) {
+        if (item.Number(id) === currentId) {
+            return item;
+        }
+    })
+    var modalTitle = document.querySelector('#modal1 h4');
+    var modalDescription = document.querySelector('#modal1 p');
+    modalTitle.innerHTML = result[0].title;
+    modalDescription.innerHTML = result[0].description;
+
+
+    // console.log(result);
+    // return result;
+}

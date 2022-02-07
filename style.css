@@ -1,46 +1,52 @@
-pre{
+pre {
     white-space: normal;
     font-size: 20px;
 }
 
-.menu{
+.menu {
     display: flex;
     justify-content: start;
-
 }
 
-.menu li{
+.menu li {
     margin: 30px;
-   
 }
 
-.menu li a{
+.menu li a {
     display: inline-block;
     padding: 20px;
     border: 2px solid green;
     text-decoration: none;
 }
 
-.sub-menu{
+.sub-menu {
     margin: 0;
     padding: 0;
     margin-left: -30px;
-    
 }
 
-.sub-menu li a{
+.sub-menu li a {
     border: 3px solid blue;
 }
 
-.todo__list li{
+.todo__list li {
     padding: 10px;
 }
 
-.card-action .total{
+.card-action .total {
     width: 20px;
 }
 
-.modal_open{
+.modal_open {
     display: block;
     top: 150px;
+}
+.border-green {
+    border: 5px solid green;
+}
+.border-red {
+    border: 5px solid red;
+}
+.modal-open {
+    display: block;
 }
